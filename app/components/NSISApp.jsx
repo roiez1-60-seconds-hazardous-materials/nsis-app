@@ -492,6 +492,7 @@ function SimTimeline({ steps, startBtn, resetBtn, runningLabel }) {
 // ─────────────────────── Main App ───────────────────────
 export default function NSISApp() {
   const [lang, setLang] = useState("he");
+  const [showInfographic, setShowInfographic] = useState(false);
   const t = content[lang];
   const isRTL = lang === "he";
   const bib = bibCategories[lang];
@@ -811,6 +812,71 @@ export default function NSISApp() {
           </div>
         </div>
       </section>
+
+      {/* ═══ INFOGRAPHIC ═══ */}
+      <section style={{ position: "relative" }}>
+        {divider("rgba(245,158,11,0.3)")}
+        <div style={{ ...sectionStyle, textAlign: "center", paddingBottom: 40 }}>
+          {sectionTitle(
+            isRTL ? "אינפוגרפיקה — מערכת NSIS" : "NSIS System Infographic",
+            isRTL ? "תרשים מסכם של הטכנולוגיה, היתרונות והמגבלות" : "Summary diagram of the technology, advantages and limitations"
+          )}
+          <button
+            onClick={() => setShowInfographic(true)}
+            style={{
+              padding: "16px 40px", borderRadius: 16, border: "1px solid rgba(245,158,11,0.3)",
+              background: "linear-gradient(135deg, rgba(245,158,11,0.12), rgba(0,212,255,0.08))",
+              color: "#f59e0b", fontWeight: 700, fontSize: 17, fontFamily: "inherit",
+              cursor: "pointer", transition: "all 0.3s",
+              display: "inline-flex", alignItems: "center", gap: 10,
+              boxShadow: "0 4px 20px rgba(245,158,11,0.1)"
+            }}
+            onMouseOver={e => { e.currentTarget.style.background = "linear-gradient(135deg, rgba(245,158,11,0.2), rgba(0,212,255,0.15))"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+            onMouseOut={e => { e.currentTarget.style.background = "linear-gradient(135deg, rgba(245,158,11,0.12), rgba(0,212,255,0.08))"; e.currentTarget.style.transform = "translateY(0)"; }}
+          >
+            <span style={{ fontSize: 22 }}>🖼️</span>
+            {isRTL ? "הצג אינפוגרפיקה מלאה" : "View Full Infographic"}
+          </button>
+        </div>
+      </section>
+
+      {/* Infographic Modal Overlay */}
+      {showInfographic && (
+        <div
+          onClick={() => setShowInfographic(false)}
+          style={{
+            position: "fixed", inset: 0, zIndex: 9999,
+            background: "rgba(0,0,0,0.9)", backdropFilter: "blur(10px)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            padding: 20, cursor: "zoom-out"
+          }}
+        >
+          <div style={{ position: "relative", maxWidth: "95vw", maxHeight: "95vh" }}>
+            <button
+              onClick={(e) => { e.stopPropagation(); setShowInfographic(false); }}
+              style={{
+                position: "absolute", top: -16, [isRTL ? "left" : "right"]: -16, zIndex: 10,
+                width: 40, height: 40, borderRadius: "50%",
+                background: "rgba(239,68,68,0.9)", border: "2px solid rgba(255,255,255,0.3)",
+                color: "#fff", fontSize: 20, fontWeight: 700, cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                boxShadow: "0 4px 16px rgba(0,0,0,0.5)"
+              }}
+            >✕</button>
+            <img
+              src="/infographic.webp"
+              alt="NSIS Infographic"
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                maxWidth: "95vw", maxHeight: "90vh",
+                borderRadius: 16, border: "2px solid rgba(255,255,255,0.1)",
+                boxShadow: "0 0 60px rgba(0,212,255,0.15)",
+                cursor: "default", objectFit: "contain"
+              }}
+            />
+          </div>
+        </div>
+      )}
 
       {/* ═══ CONTACT ═══ */}
       <section id="contact" style={{ position: "relative" }}>
