@@ -555,6 +555,7 @@ export default function NSISApp() {
         details summary::-webkit-details-marker,details summary::marker{display:none;content:''}
         details summary{list-style:none}
         details[open] summary{border-bottom:1px solid rgba(255,255,255,0.04)}
+        .nav-scroll::-webkit-scrollbar{display:none}
       `}</style>
 
       {/* ═══ Navigation ═══ */}
@@ -574,12 +575,13 @@ export default function NSISApp() {
             <span style={{ fontWeight: 700, fontSize: 18, color: "#e2e8f0" }}>NSIS</span>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 4, flexWrap: "wrap" }}>
+          <div className="nav-scroll" style={{ display: "flex", alignItems: "center", gap: 2, flexWrap: "nowrap", overflowX: "auto", msOverflowStyle: "none", scrollbarWidth: "none" }}>
             {Object.entries(t.nav).map(([key, label]) => (
               <button key={key} onClick={() => scrollTo(key === "home" ? "hero" : key)}
                 style={{
                   background: "none", border: "none", color: "#94a3b8", fontSize: 13, fontWeight: 500,
-                  padding: "8px 12px", borderRadius: 8, cursor: "pointer", fontFamily: "inherit", transition: "all 0.2s"
+                  padding: "8px 10px", borderRadius: 8, cursor: "pointer", fontFamily: "inherit", transition: "all 0.2s",
+                  whiteSpace: "nowrap", flexShrink: 0
                 }}
                 onMouseOver={e => { e.target.style.color = "#00d4ff"; e.target.style.background = "rgba(0,212,255,0.08)"; }}
                 onMouseOut={e => { e.target.style.color = "#94a3b8"; e.target.style.background = "none"; }}
@@ -588,7 +590,7 @@ export default function NSISApp() {
 
             {/* ═══ Language Toggle ═══ */}
             <div style={{
-              display: "flex", alignItems: "center", marginInlineStart: 8,
+              display: "flex", alignItems: "center", marginInlineStart: 6, flexShrink: 0,
               background: "rgba(255,255,255,0.06)", borderRadius: 10, padding: 3,
               border: "1px solid rgba(255,255,255,0.08)"
             }}>
