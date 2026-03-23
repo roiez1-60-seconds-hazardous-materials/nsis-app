@@ -843,35 +843,39 @@ export default function NSISApp() {
       {/* Infographic Modal Overlay */}
       {showInfographic && (
         <div
-          onClick={() => setShowInfographic(false)}
           style={{
             position: "fixed", inset: 0, zIndex: 9999,
-            background: "rgba(0,0,0,0.9)", backdropFilter: "blur(10px)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            padding: 20, cursor: "zoom-out"
+            background: "#000",
+            display: "flex", flexDirection: "column",
+            overflow: "auto", WebkitOverflowScrolling: "touch"
           }}
         >
-          <div style={{ position: "relative", maxWidth: "95vw", maxHeight: "95vh" }}>
+          <div style={{
+            position: "sticky", top: 0, zIndex: 10,
+            display: "flex", justifyContent: "flex-end", padding: "12px 16px",
+            background: "linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%)"
+          }}>
             <button
-              onClick={(e) => { e.stopPropagation(); setShowInfographic(false); }}
+              onClick={() => setShowInfographic(false)}
               style={{
-                position: "absolute", top: -16, [isRTL ? "left" : "right"]: -16, zIndex: 10,
-                width: 40, height: 40, borderRadius: "50%",
+                width: 44, height: 44, borderRadius: "50%",
                 background: "rgba(239,68,68,0.9)", border: "2px solid rgba(255,255,255,0.3)",
-                color: "#fff", fontSize: 20, fontWeight: 700, cursor: "pointer",
+                color: "#fff", fontSize: 22, fontWeight: 700, cursor: "pointer",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                boxShadow: "0 4px 16px rgba(0,0,0,0.5)"
+                boxShadow: "0 4px 16px rgba(0,0,0,0.5)", flexShrink: 0
               }}
             >✕</button>
+          </div>
+          <div style={{
+            flex: 1, display: "flex", alignItems: "center", justifyContent: "center",
+            padding: "0 0 20px"
+          }}>
             <img
               src="/infographic.webp"
               alt="NSIS Infographic"
-              onClick={(e) => e.stopPropagation()}
               style={{
-                maxWidth: "95vw", maxHeight: "90vh",
-                borderRadius: 16, border: "2px solid rgba(255,255,255,0.1)",
-                boxShadow: "0 0 60px rgba(0,212,255,0.15)",
-                cursor: "default", objectFit: "contain"
+                width: "100%", maxWidth: "100vw",
+                objectFit: "contain", cursor: "default"
               }}
             />
           </div>
